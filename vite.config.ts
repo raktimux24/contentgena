@@ -6,5 +6,11 @@ export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
     exclude: ['lucide-react'],
+    include: ['react-hot-toast'],
+  },
+  build: {
+    rollupOptions: {
+      external: ['react-hot-toast'],
+    },
   },
 });

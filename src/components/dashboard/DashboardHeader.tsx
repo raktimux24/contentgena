@@ -4,6 +4,8 @@ import { Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useAuth } from '../../contexts/AuthContext';
 import UserProfileMenu from './UserProfileMenu';
+import ContentAILogo from '../../../public/ContentAI_byKarao.svg';
+import ContentAILogoLight from '../../../public/ContentAI_byKarao_Light.svg';
 
 const navigation = [
   { name: 'Overview', href: '/dashboard' },
@@ -32,8 +34,12 @@ export default function DashboardHeader() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/dashboard" className="text-2xl font-black tracking-tight">
-            CONTENT.AI
+          <Link to="/dashboard" className="flex items-center">
+            <img 
+              src={isDark ? ContentAILogo : ContentAILogoLight} 
+              alt="Content.AI Logo" 
+              className="h-8" 
+            />
           </Link>
 
           {/* Navigation */}

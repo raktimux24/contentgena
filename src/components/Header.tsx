@@ -4,6 +4,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
 import { signOut } from 'firebase/auth';
 import { auth } from '../config/firebase';
+import ContentAILogo from '../../public/ContentAI_byKarao.svg';
+import ContentAILogoLight from '../../public/ContentAI_byKarao_Light.svg';
 
 export default function Header() {
   const { isDark, toggleTheme } = useTheme();
@@ -32,7 +34,13 @@ export default function Header() {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="text-2xl font-black tracking-tight">CONTENT.AI</Link>
+            <Link to="/" className="flex items-center">
+              <img 
+                src={isDark ? ContentAILogo : ContentAILogoLight} 
+                alt="Content.AI Logo" 
+                className="h-8" 
+              />
+            </Link>
           </div>
 
           {/* Desktop Navigation */}

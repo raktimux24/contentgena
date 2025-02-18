@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTheme } from '../../contexts/ThemeContext';
+import ContentAILogo from '../../../public/ContentAI_byKarao.svg';
+import ContentAILogoLight from '../../../public/ContentAI_byKarao_Light.svg';
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -7,13 +10,19 @@ interface AuthLayoutProps {
 }
 
 export default function AuthLayout({ children, title }: AuthLayoutProps) {
+  const { isDark } = useTheme();
+  
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full mx-auto space-y-8">
         {/* Logo */}
         <div>
           <Link to="/" className="flex justify-center">
-            <h1 className="text-2xl font-black tracking-tight">CONTENT.AI</h1>
+            <img 
+              src={isDark ? ContentAILogo : ContentAILogoLight} 
+              alt="Content.AI Logo" 
+              className="h-10" 
+            />
           </Link>
         </div>
 
