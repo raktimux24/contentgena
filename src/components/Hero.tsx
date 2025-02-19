@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default function Hero() {
   return (
-    <section className="relative h-[90vh] pt-48 pb-24 overflow-hidden">
+    <section className="relative h-[100vh] pt-48 pb-24 overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-white dark:from-gray-900 dark:to-gray-800" />

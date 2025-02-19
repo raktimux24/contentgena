@@ -103,27 +103,27 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <DashboardHeader />
       
-      <main className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto space-y-12">
+      <main className="pt-20 sm:pt-24 pb-8 sm:pb-12 px-3 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12">
           {/* Header Section */}
-          <div className="flex justify-between items-center">
-            <h1 className="text-4xl font-black transform -rotate-1">Dashboard</h1>
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-0">
+            <h1 className="text-3xl sm:text-4xl font-black transform -rotate-1">Dashboard</h1>
             <Link
               to="/dashboard/generate"
-              className="flex items-center gap-2 px-6 py-3 bg-black dark:bg-white text-white dark:text-black 
+              className="flex items-center justify-center gap-2 px-4 sm:px-6 py-3 bg-black dark:bg-white text-white dark:text-black 
                 font-bold rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 
-                transform hover:-rotate-1 hover:scale-105 transition-transform"
+                transform hover:-rotate-1 hover:scale-105 transition-transform text-sm sm:text-base"
             >
-              <Plus className="w-5 h-5" />
+              <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
               New Content
             </Link>
           </div>
 
           {/* Stats Grid */}
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {loading ? (
               Array(3).fill(0).map((_, index) => (
-                <div key={index} className="h-32 bg-white dark:bg-gray-800 rounded-lg border-4 border-black dark:border-gray-700 animate-pulse" />
+                <div key={index} className="h-28 sm:h-32 bg-white dark:bg-gray-800 rounded-lg border-4 border-black dark:border-gray-700 animate-pulse" />
               ))
             ) : (
               statsCards.map((stat) => (
@@ -140,10 +140,10 @@ export default function DashboardPage() {
 
           {/* Recent Content */}
           <div>
-            <h2 className="text-2xl font-bold mb-6 transform rotate-1">Recent Content</h2>
-            <div className="grid gap-6">
+            <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 transform rotate-1">Recent Content</h2>
+            <div className="grid gap-4 sm:gap-6">
               {loading ? (
-                <div className="h-24 bg-white dark:bg-gray-800 rounded-lg border-4 border-black dark:border-gray-700 animate-pulse" />
+                <div className="h-20 sm:h-24 bg-white dark:bg-gray-800 rounded-lg border-4 border-black dark:border-gray-700 animate-pulse" />
               ) : recentContent.length > 0 ? (
                 recentContent.map((content) => (
                   <ContentCard
@@ -156,14 +156,14 @@ export default function DashboardPage() {
                   />
                 ))
               ) : (
-                <div className="text-center py-12">
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">No content generated yet</p>
+                <div className="text-center py-8 sm:py-12">
+                  <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm sm:text-base">No content generated yet</p>
                   <Link
                     to="/dashboard/generate"
-                    className="inline-flex items-center gap-2 font-bold text-indigo-600 dark:text-indigo-400 hover:underline"
+                    className="inline-flex items-center gap-2 font-bold text-indigo-600 dark:text-indigo-400 hover:underline text-sm sm:text-base"
                   >
                     Create your first content
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
                   </Link>
                 </div>
               )}

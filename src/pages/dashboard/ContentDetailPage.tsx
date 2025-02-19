@@ -95,12 +95,12 @@ function Tab({ type, isActive, onClick, icon: Icon, label }: TabProps) {
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-2 px-6 py-3 font-bold rounded-t-lg transition-colors
+      className={`flex items-center gap-1 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 font-bold rounded-t-lg transition-colors text-sm sm:text-base whitespace-nowrap
         ${isActive 
           ? 'bg-white dark:bg-gray-800 text-black dark:text-white border-4 border-b-0 border-black dark:border-gray-700' 
           : 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white'}`}
     >
-      <Icon className="w-5 h-5" />
+      <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
       {label}
     </button>
   );
@@ -246,7 +246,7 @@ export default function ContentDetailPage() {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <DashboardHeader />
-        <main className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+        <main className="pt-20 sm:pt-24 pb-8 sm:pb-12 px-3 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
             <div className="animate-pulse space-y-4">
               <div className="h-8 w-32 bg-gray-200 dark:bg-gray-700 rounded" />
@@ -263,7 +263,7 @@ export default function ContentDetailPage() {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <DashboardHeader />
-        <main className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+        <main className="pt-20 sm:pt-24 pb-8 sm:pb-12 px-3 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-2xl font-bold text-red-600 dark:text-red-400 mb-4">
               {error || 'Content not found'}
@@ -284,37 +284,37 @@ export default function ContentDetailPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <DashboardHeader />
       
-      <main className="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+      <main className="pt-20 sm:pt-24 pb-8 sm:pb-12 px-3 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           {/* Back Button */}
           <button
             onClick={() => navigate(-1)}
-            className="group mb-8 font-bold flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white"
+            className="group mb-6 sm:mb-8 font-bold flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            Back to Content History
+            <span className="text-sm sm:text-base">Back to Content History</span>
           </button>
 
           {/* Title Section */}
-          <div className="mb-8">
-            <h1 className="text-3xl font-black mb-2 transform -rotate-1">
+          <div className="mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-3xl font-black mb-2 transform -rotate-1">
               {content.topic}
             </h1>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
               Created: {formatDate(content.createdAt)}
             </p>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
               Status: {content.status}
             </p>
             {content.status === 'published' && content.publishedAt && (
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                 Published: {formatDate(content.publishedAt)}
               </p>
             )}
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-2 mb-[-4px]">
+          <div className="flex gap-1 sm:gap-2 mb-[-4px] overflow-x-auto pb-1 scrollbar-hide">
             {tabs.map((tab) => (
               <Tab
                 key={tab.type}
@@ -330,47 +330,49 @@ export default function ContentDetailPage() {
           {/* Content Container */}
           <div className="bg-white dark:bg-gray-800 rounded-lg border-4 border-black dark:border-gray-700">
             {/* Action Toolbar */}
-            <div className="p-4 border-b-4 border-black dark:border-gray-700 flex justify-end gap-2">
+            <div className="p-2 sm:p-4 border-b-4 border-black dark:border-gray-700 flex flex-wrap sm:flex-nowrap items-center justify-end gap-2">
               <select
                 value={content.status || 'generated'}
                 onChange={(e) => handleStatusChange(e.target.value as 'generated' | 'reviewed' | 'published')}
-                className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                className="w-full sm:w-auto px-3 sm:px-4 py-2 text-sm sm:text-base rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
               >
                 <option value="generated">Generated</option>
                 <option value="reviewed">Reviewed</option>
                 <option value="published">Published</option>
               </select>
-              <button
-                onClick={handleCopy}
-                disabled={copied}
-                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors disabled:opacity-50"
-                title="Copy to clipboard"
-              >
-                {copied ? (
-                  <CheckCheck className="w-5 h-5 text-green-500" />
-                ) : (
-                  <Copy className="w-5 h-5" />
-                )}
-              </button>
-              <button
-                onClick={handleDelete}
-                className="p-2 hover:bg-red-100 dark:hover:bg-red-900 rounded-md transition-colors"
-                title="Delete content"
-              >
-                <Trash2 className="w-5 h-5 text-red-600 dark:text-red-400" />
-              </button>
+              <div className="flex gap-2">
+                <button
+                  onClick={handleCopy}
+                  disabled={copied}
+                  className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors disabled:opacity-50"
+                  title="Copy to clipboard"
+                >
+                  {copied ? (
+                    <CheckCheck className="w-5 h-5 text-green-500" />
+                  ) : (
+                    <Copy className="w-5 h-5" />
+                  )}
+                </button>
+                <button
+                  onClick={handleDelete}
+                  className="p-2 hover:bg-red-100 dark:hover:bg-red-900 rounded-md transition-colors"
+                  title="Delete content"
+                >
+                  <Trash2 className="w-5 h-5 text-red-600 dark:text-red-400" />
+                </button>
+              </div>
             </div>
 
             {/* Content Section */}
-            <div className="p-8">
-              <div className="prose dark:prose-invert max-w-none">
+            <div className="p-4 sm:p-8">
+              <div className="prose dark:prose-invert max-w-none prose-sm sm:prose-base">
                 {activeTab === 'twitter' ? (
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {content.tweet.split('\n').map((tweet, index) => (
                       tweet.trim() && (
                         <div
                           key={index}
-                          className="p-4 bg-gray-50 dark:bg-gray-900 rounded-md"
+                          className="p-3 sm:p-4 text-sm sm:text-base bg-gray-50 dark:bg-gray-900 rounded-md"
                         >
                           {tweet}
                         </div>
@@ -392,25 +394,25 @@ export default function ContentDetailPage() {
         </div>
       </main>
       {showDatePicker && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-            <h3 className="text-lg font-semibold mb-4">Select Publish Date</h3>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-sm">
+            <h3 className="text-base sm:text-lg font-semibold mb-4">Select Publish Date</h3>
             <input
               type="datetime-local"
               value={publishDate}
               onChange={(e) => setPublishDate(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white mb-4"
+              className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white mb-4"
             />
-            <div className="flex justify-end gap-4">
+            <div className="flex justify-end gap-3 sm:gap-4">
               <button
                 onClick={() => setShowDatePicker(false)}
-                className="px-4 py-2 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white"
+                className="px-3 sm:px-4 py-2 text-sm sm:text-base text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white"
               >
                 Cancel
               </button>
               <button
                 onClick={handlePublishDateConfirm}
-                className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition-colors"
+                className="px-3 sm:px-4 py-2 text-sm sm:text-base bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition-colors"
                 disabled={!publishDate}
               >
                 Confirm

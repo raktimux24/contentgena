@@ -1,14 +1,23 @@
 import React from 'react';
 import { Twitter, Linkedin, Github, Mail } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
+import ContentAILogo from '../../public/ContentAI_byKarao.svg';
+import ContentAILogoLight from '../../public/ContentAI_byKarao_Light.svg';
 
 export default function Footer() {
+  const { isDark } = useTheme();
+
   return (
     <footer className="bg-gray-50 dark:bg-gray-900 border-t-4 border-black dark:border-gray-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
-            <h3 className="text-2xl font-black mb-4">CONTENT.AI</h3>
+            <img 
+              src={isDark ? ContentAILogo : ContentAILogoLight}
+              alt="Content.AI Logo"
+              className="h-8 mb-4"
+            />
             <p className="text-gray-600 dark:text-gray-300">
               Transform your ideas into powerful content across multiple platforms.
             </p>
@@ -57,7 +66,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
           <p className="text-center text-gray-600 dark:text-gray-300">
-            © {new Date().getFullYear()} Content.AI. All rights reserved.
+            {new Date().getFullYear()} Content.AI. All rights reserved.
           </p>
         </div>
       </div>

@@ -5,12 +5,16 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
-    exclude: ['lucide-react'],
-    include: ['react-hot-toast'],
+    exclude: ['lucide-react']
   },
   build: {
     rollupOptions: {
-      external: ['react-hot-toast'],
-    },
-  },
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'firebase-vendor': ['firebase/app', 'firebase/auth', 'firebase/firestore'],
+        }
+      }
+    }
+  }
 });
